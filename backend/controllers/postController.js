@@ -1,5 +1,6 @@
 const Post = require("../models/Post");
 const { uploadBuffer } = require("../config/cloudinary");
+const { prepareImageBuffer } = require("../middleware/uploadMiddleware");
 
 // Create Post
 const createPost = async (req, res) => {
@@ -9,7 +10,8 @@ const createPost = async (req, res) => {
     let image = "";
 
     if (req.file) {
-      const uploadResult = await uploadBuffer(req.file.buffer, {
+      const imageBuffer = await prepareImageBuffer(req.file);
+      const uploadResult = await uploadBuffer(imageBuffer, {
         folder: "socially-posts",
         resource_type: "image",
       });
@@ -34,9 +36,12 @@ const createPost = async (req, res) => {
       post,
     });
   } catch (error) {
+    if (error.code === "IMAGE_CONVERSION_FAILED") {
+      return res.status(400).json({ message: error.message });
+    }
+
     res.status(500).json({
       message: "Server error",
-      error: error.message,
     });
   }
 };
