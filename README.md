@@ -102,6 +102,20 @@ Socially uses a clean, modern, and minimal interface inspired by contemporary so
 
 ---
 
+## Screenshots
+
+### Signup Page
+![Signup Page](./screenshots/signup.png)
+
+### Login Page
+![Login Page](./screenshots/login.png)
+
+### Home / Feed
+![Home Feed](./screenshots/home.png)
+
+### Responsive Mobile View
+![Mobile View](./screenshots/mobile.png)
+
 ## 🛠️ Tech Stack
 
 ### Frontend
