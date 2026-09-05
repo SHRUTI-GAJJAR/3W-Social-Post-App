@@ -1,11 +1,20 @@
 const Post = require("../models/Post");
+const { uploadBuffer } = require("../config/cloudinary");
 
 // Create Post
 const createPost = async (req, res) => {
   try {
     const { text } = req.body;
 
-    const image = req.file ? `/uploads/${req.file.filename}` : "";
+    let image = "";
+
+    if (req.file) {
+      const uploadResult = await uploadBuffer(req.file.buffer, {
+        folder: "socially-posts",
+        resource_type: "image",
+      });
+      image = uploadResult.secure_url;
+    }
 
     if (!text?.trim() && !image) {
       return res.status(400).json({
