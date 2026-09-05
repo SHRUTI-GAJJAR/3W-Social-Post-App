@@ -9,9 +9,7 @@ Socially allows users to create accounts, share text and images, explore a publi
 ## 🌐 Live Demo
 
 🚀 **Frontend:** Coming Soon  
-⚙️ **Backend API:** Coming Soon
-
-> Live deployment links will be added after deployment.
+⚙️ **Backend API:** https://threew-social-post-app-0as7.onrender.com/
 
 ---
 

@@ -18,7 +18,7 @@ export const getImageUrl = (imagePath) => {
   if (!imagePath) return "";
   if (imagePath.startsWith("http")) return imagePath;
 
-  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+  const apiUrl = import.meta.env.VITE_API_URL || "";
   const backendOrigin = apiUrl.replace(/\/api\/?$/, "");
 
   if (imagePath.startsWith("/uploads/")) {
