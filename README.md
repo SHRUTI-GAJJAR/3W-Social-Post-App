@@ -8,7 +8,8 @@ Socially allows users to create accounts, share text and images, explore a publi
 
 ## 🌐 Live Demo
 
-🚀 **Frontend:** Coming Soon  
+🚀 **Frontend:** https://3-w-social-post-app-alpha.vercel.app/
+
 ⚙️ **Backend API:** https://threew-social-post-app-0as7.onrender.com/
 
 ---
@@ -25,8 +26,9 @@ Socially is a mini social media platform where users can:
 - 👤 View usernames associated with likes and comments
 - 📱 Use the application across mobile, tablet, and desktop devices
 - ⚡ Load posts efficiently using pagination
+- ☁️ Store uploaded images securely using Cloudinary
 
-The project focuses on clean UI, responsive design, reusable components, REST API architecture, and MongoDB data modeling.
+The project focuses on clean UI, responsive design, reusable components, REST API architecture, secure authentication, cloud-based image storage, and MongoDB data modeling.
 
 ---
 
@@ -48,6 +50,16 @@ The project focuses on clean UI, responsive design, reusable components, REST AP
 - Public social feed
 - Newest posts displayed first
 - Image upload support
+- Cloud-based image storage using Cloudinary
+
+### ☁️ Image Storage
+
+- Images are uploaded through the backend
+- Multer is used with memory storage for handling uploads
+- Images are uploaded securely to Cloudinary
+- Cloudinary HTTPS URLs are stored in MongoDB
+- Images can be accessed from different devices and environments
+- Local server file storage is not used for new uploads
 
 ### ❤️ Likes
 
@@ -103,16 +115,22 @@ Socially uses a clean, modern, and minimal interface inspired by contemporary so
 ## Screenshots
 
 ### Signup Page
+
 ![Signup Page](./screenshots/signup.png)
 
 ### Login Page
+
 ![Login Page](./screenshots/login.png)
 
 ### Home / Feed
+
 ![Home Feed](./screenshots/home.png)
 
 ### Responsive Mobile View
+
 ![Mobile View](./screenshots/mobile.png)
+
+---
 
 ## 🛠️ Tech Stack
 
@@ -133,6 +151,7 @@ Socially uses a clean, modern, and minimal interface inspired by contemporary so
 - JWT
 - bcryptjs
 - Multer
+- Cloudinary
 - CORS
 - dotenv
 
@@ -141,6 +160,7 @@ Socially uses a clean, modern, and minimal interface inspired by contemporary so
 - Vercel — Frontend
 - Render — Backend
 - MongoDB Atlas — Database
+- Cloudinary — Image Storage
 
 ---
 
@@ -163,11 +183,12 @@ Socially uses a clean, modern, and minimal interface inspired by contemporary so
 │
 ├── backend/
 │   ├── config/
+│   │   ├── db.js
+│   │   └── cloudinary.js
 │   ├── controllers/
 │   ├── middleware/
 │   ├── models/
 │   ├── routes/
-│   ├── uploads/
 │   ├── server.js
 │   ├── package.json
 │   └── ...
@@ -198,7 +219,7 @@ Stores:
 - Post creator
 - Username
 - Text
-- Image
+- Cloudinary image URL
 - Likes
 - Comments
 - Timestamps
@@ -279,8 +300,14 @@ Create a `.env` file inside the `backend` folder:
 
 ```env
 PORT=3000
+
 MONGODB_URI=YOUR_MONGODB_CONNECTION_STRING
+
 JWT_SECRET=YOUR_SECRET_KEY
+
+CLOUDINARY_CLOUD_NAME=YOUR_CLOUD_NAME
+CLOUDINARY_API_KEY=YOUR_API_KEY
+CLOUDINARY_API_SECRET=YOUR_API_SECRET
 ```
 
 Start the backend:
@@ -334,8 +361,16 @@ Environment files contain sensitive configuration and should never be committed 
 
 ```env
 PORT=
+
 MONGODB_URI=
+
 JWT_SECRET=
+
+CLOUDINARY_CLOUD_NAME=
+
+CLOUDINARY_API_KEY=
+
+CLOUDINARY_API_SECRET=
 ```
 
 ### Frontend
@@ -363,11 +398,15 @@ The application has been tested for:
 - ✅ Comments
 - ✅ Like and comment counts
 - ✅ Pagination
+- ✅ Cloudinary image upload
 - ✅ Image display
 - ✅ Responsive layouts
 - ✅ Mobile compatibility
 - ✅ Production build
 - ✅ Reusable React components
+- ✅ Frontend deployment on Vercel
+- ✅ Backend deployment on Render
+- ✅ MongoDB Atlas connection
 
 ---
 
@@ -408,7 +447,7 @@ The application uses reusable React components and a centralized API service.
 
 ### 📝 Code Comments & Best Practices
 
-The project follows a modular folder structure, meaningful naming, environment variable usage, protected API routes, and focused code comments where appropriate.
+The project follows a modular folder structure, meaningful naming, environment variable usage, protected API routes, cloud-based image storage, and focused code comments where appropriate.
 
 ---
 
@@ -426,12 +465,13 @@ The project follows a modular folder structure, meaningful naming, environment v
         │    Vercel     │         │    Render     │
         │   Frontend    │────────→│    Backend    │
         └───────────────┘         └───────┬───────┘
-                                         │
-                                         ↓
-                                  ┌───────────────┐
-                                  │ MongoDB Atlas │
-                                  │   Database    │
-                                  └───────────────┘
+                                          │
+                         ┌────────────────┴────────────────┐
+                         ↓                                 ↓
+                 ┌────────────────┐                ┌────────────────┐
+                 │ MongoDB Atlas  │                │   Cloudinary   │
+                 │    Database    │                │ Image Storage  │
+                 └────────────────┘                └────────────────┘
 ```
 
 ---
@@ -447,7 +487,6 @@ Possible future improvements include:
 - Search functionality
 - Real-time interactions
 - Image optimization
-- Cloud-based image storage
 
 ---
 
